@@ -1,6 +1,6 @@
 opt = 'demo' # opt or cifar for now
 # 0 for build,others for query; 1 for coarse; 2 for fc7; 3 for both
-step = 0
+step = 1
 
 caffe_root = '/home/fious/gitroom/caffe-cvprw15'
 caffe_path = '/home/fious/gitroom/caffe/'
@@ -19,6 +19,15 @@ def get_files():
 def get_img_list():
     if opt == 'demo':
         img_list_file = caffe_root + '/img_list.txt'
+    elif opt == 'cifar':
+        img_list_file = caffe_root + '/examples/cvprw15-cifar10/dataset/train-file-list.txt'
 
     with open(img_list_file) as f:
         return [line.strip() for line in f.readlines()]
+
+if opt =='cifar':
+    npys_path = './pyhash/npys/'
+    dbfile = 'hash.db'
+elif opt == 'demo':
+    npys_path = './pyhash/npys_demo/'
+    dbfile = 'demo.db'

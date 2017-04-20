@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} Index {% endblock %}
+{% block body %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <div class="well" style=" top: 50%;margin-top:200px;">
+        <form action="/query" method="post" enctype="multipart/form-data">
+           <input type="file"name="img"/>
+           <label><input name="step" type="radio" value="1" />coarse match </label>
+           <label><input name="step" type="radio" value="2" />fine match</label>
+           <label><input name="step" type="radio" value="3" />both </label>
+           <br>
+           <button type="submit" class="btn btn-primary btn-lg btn-block">search</button>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+{% endblock %}

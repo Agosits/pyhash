@@ -1,0 +1,11 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% if coarse_time %}
+<p> coarse_time: {{ coarse_time }} </p>
+{% endif %}
+{% if fine_time %}
+<p>fine_time: {{ fine_time }}</p>
+{% endif %}
+<hr>
+{% for img in result %}
+<img src="{{ url_for('static', filename=img) }}" />
+{% endfor %}

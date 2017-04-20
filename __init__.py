@@ -3,6 +3,7 @@ import sys
 import numpy as np
 
 from .db import database,build_db
+from .utils import query, fine_match
 from .settings import (
     caffe_root, caffe_path, get_files, get_img_list, opt, step, mean_file
 )
@@ -32,12 +33,3 @@ transformer.set_channel_swap('data', (2,1,0))  # swap channels from RGB to BGR
 net.blobs['data'].reshape(1,        # batch size
                           3,         # 3-channel (BGR) images
                           227, 227)  # image size is 227x227
-
-#db
-db = database(48)
-if step == 0:
-    build_db(img_list, db, transformer, net)
-else:
-    pass
-    # input query image
-    # work img
