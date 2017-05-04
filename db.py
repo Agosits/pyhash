@@ -3,7 +3,7 @@ import logging
 import numpy as np
 
 from .utils import hamming_distance, network,timing
-from .settings import opt, npys_path, caffe_root, dbfile
+from .settings import opt, npys_path, caffe_root, dbfile, table_name
 
 logger = logging.getLogger('db')
 handler = logging.StreamHandler()
@@ -12,31 +12,35 @@ logger.setLevel(logging.DEBUG)
 
 
 class database(object):
-    def __init__(self, code_length):
+    def __init__(self):
         self.db = sq.connect(dbfile)
-        self.length = code_length
+        self.name = table_name
 
-    def create_table(self, table_name=None):
-        table_name = table_name or 'table_{}'.format(self.length)
+    def create_table(self, length=48):
         try:
             create_table = 'CREATE TABLE {} (\
                     id integer primary key not null,\
-                    code varchar({}),\
-                    img  varchar(100)\
-                )'.format(table_name, self.length)
+                    code{} varchar(100),\
+                    img  varchar(100),\
+                    label varchar(100)\
+                )'.format(self.name, length)
             self.db.execute(create_table)
             self.db.commit()
-            print 'create_table {} success.'.format(table_name)
+            print 'create_table {} success.'.format(self.name)
         except Exception as e:
-            logger.error('create table {} failed'.format(table_name))
+            logger.error('create table {} failed'.format(self.name))
             logger.error(repr(e))
 
-    def insert(self, code, img_path):
+    def insert(self, *args, **kwargs):
+        keys = kwargs.keys()
+        values = []
+        for key in keys:
+            values.append(kwargs[key])
         try:
-            sql = 'INSERT INTO table_{} (code,img) VALUES ({},{});'.format(
-                self.length, code, img_path
+            sql = 'INSERT INTO {} {} VALUES {};'.format(
+                self.name, tuple(keys), tuple(values)
             )
-            # print sql
+            print sql
             self.db.execute(sql)
         except Exception as e:
             logger.error('insert failed')
@@ -45,7 +49,7 @@ class database(object):
 
     def maxid(self, recall=False):
         try:
-            sql = 'SELECT max(id) FROM table_{}'.format(self.length)
+            sql = 'SELECT max(id) FROM {}'.format(self.name)
             tmp = self.db.execute(sql)
             for i in tmp:
                 result = i[0]
@@ -71,9 +75,9 @@ class database(object):
         self.db.close()
 
     @timing('coarse match')
-    def query(self, code ,threshold=5):
+    def query(self, code ,length=48, threshold=5):
         cur = self.db.cursor()
-        sql = 'SELECT id,code,img FROM table_{}'.format(self.length)
+        sql = 'SELECT id,code{},img,label FROM {}'.format(length, self.name)
         tmp = cur.execute(sql)
         result = []
         for row in tmp:
@@ -84,23 +88,11 @@ class database(object):
 
     def fetch_img_path(self, ids):
         cur = self.db.cursor()
-        sql = 'SELECT id,img FROM table_{} WHERE id IN {}'.format(self.length, tuple(ids))
+        sql = 'SELECT img,label FROM {} WHERE id IN {}'.format(self.name, tuple(ids))
         print sql
         tmp = cur.execute(sql)
         result = []
         for row in tmp:
-            result.append(row[1])
+            result.append(row[0])
         cur.close()
         return result
-
-def build_db(img_list, db, transformer, net):
-    print '***** build_db opt={} *****'.format(opt)
-    id = db.maxid()
-    for img in img_list:
-        id += 1
-        hashcode, fc7 = network(caffe_root + img, transformer, net)
-        db.insert('"'+hashcode+'"', '"'+img+'"')
-        np.save(npys_path + '{}.npy'.format(id), fc7)
-        if id % 100 == 0:
-            print '***** id = {},tot = {} *****'.format(id, len(img_list))
-    db.commit()

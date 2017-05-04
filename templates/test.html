@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} Index {% endblock %}
+{% block body %}
+
+
+<div style=" position: absolute; left: 35%;top:40%;  ">
+  <form action="/query" method="post" enctype="multipart/form-data">
+    <div style="float:left">
+        <button type="button" class="btn btn-default btn-lg">Please input your image</button>
+    </div>
+    <div style=" float:left; margin-top:10px; margin-left:20px;">
+          <input type="file"name="img"/>
+    </div>
+    <div class="clear" style="clear:both;"></div>
+    <div style=" margin-top:10px; position: absolute; left: 25%;">
+          <button type="submit" class="btn btn-warning btn-lg">Go and Search</button>
+    </div>
+  </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block title %} Index {% endblock %}
+{% block body %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-3">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" style=" top:50%;margin-top:100px; width:600px;height:400px;">
+          <!-- 轮播（Carousel）指标 -->
+          <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+              <li data-target="#myCarousel" data-slide-to="3"></li>
+          </ol>
+          <!-- 轮播（Carousel）项目 -->
+          <div class="carousel-inner">
+              <div class="item active">
+                  <div class="well" style="width:400px;height:200px; Margin:100px;background:#1874CD;">
+                    <form action="/query" method="post" enctype="multipart/form-data">
+                       <input type="file"name="img"/>
+                       <label><input name="step" type="radio" value="1" />coarse match </label>
+                       <label><input name="step" type="radio" value="2" />fine match</label>
+                       <label><input name="step" type="radio" value="3" />both </label>
+                       <br>
+                       <button type="submit" class="btn btn-success btn-lg btn-block">search</button>
+                    </form>
+                </div>
+
+              </div>
+              <div class="item">
+                  <img src="{{ url_for('static', filename='/pyhash/cifar.jpg') }}" style="width:500px;height:400px;margin-left:50px;">
+              </div>
+              <div class="item">
+                <div class="well" style="margin-top:10px;">
+                  <table class="table" style="text-align:center;">
+                    <caption style="text-align:center;">cifar 48位哈希码 top k准确率</caption>
+                    <thead>
+                      <tr>
+                        <th style="text-align:center;">k</th>
+                        <th style="text-align:center;">precision</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>10</td>
+                        <td>0.9517</td>
+                      </tr>
+                      <tr>
+                        <td>200</td>
+                        <td>0.9626</td>
+                      </tr>
+                      <tr>
+                        <td>400</td>
+                        <td>0.9630</td>
+                      </tr>
+                      <tr>
+                        <td>600</td>
+                        <td>0.9631</td>
+                      </tr>
+                      <tr>
+                        <td>800</td>
+                        <td>0.9632</td>
+                      </tr>
+                      <tr>
+                        <td>1000</td>
+                        <td>0.96632</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="item">
+                  <img src="{{ url_for('static', filename='/pyhash/mnist.jpg') }}" style="width:500px;height:400px;margin-left:50px;">
+              </div>
+              <div class="item">
+                <div class="well" style="margin-top:10px;">
+                  <table class="table" style="text-align:center;">
+                    <caption style="text-align:center;">mnist 48位哈希码 top k准确率</caption>
+                    <thead>
+                      <tr>
+                        <th style="text-align:center;">k</th>
+                        <th style="text-align:center;">precision</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>10</td>
+                        <td>1</td>
+                      </tr>
+                      <tr>
+                        <td>200</td>
+                        <td>0.9965</td>
+                      </tr>
+                      <tr>
+                        <td>400</td>
+                        <td>0.998</td>
+                      </tr>
+                      <tr>
+                        <td>600</td>
+                        <td>0.998</td>
+                      </tr>
+                      <tr>
+                        <td>800</td>
+                        <td>0.99825</td>
+                      </tr>
+                      <tr>
+                        <td>1000</td>
+                        <td>0.9984</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
+          <!-- 轮播（Carousel）导航 -->
+          <a class="carousel-control left" href="#myCarousel"
+              data-slide="prev">&lsaquo;
+          </a>
+          <a class="carousel-control right" href="#myCarousel"
+              data-slide="next">&rsaquo;
+          </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

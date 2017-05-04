@@ -1,11 +1,34 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-{% if coarse_time %}
-<p> coarse_time: {{ coarse_time }} </p>
-{% endif %}
-{% if fine_time %}
-<p>fine_time: {{ fine_time }}</p>
-{% endif %}
-<hr>
-{% for img in result %}
-<img src="{{ url_for('static', filename=img) }}" />
-{% endfor %}
+{% extends "base.html" %}
+{% block title %} result {% endblock %}
+{% block body %}
+
+
+<div style=" position: absolute; left: 20%;right:20%;top:10%;  ">
+  <div style=" margin-top:10px; position: absolute; left: 30%;">
+        <button type="button" class="btn btn-warning btn-lg">Input Image</button>
+        <img src="{{ url_for('static', filename=origin_file) }}" height="144" width="144" />
+  </div>
+
+  <div>
+    <div style="float:left; margin-top:200px; width:40%">
+      <button type="button" class="btn btn-default btn-block">coarse_time:{{ coarse_time }}</button>
+      {% for img in coarse_result %}
+      <img src="{{ url_for('static', filename=img) }}" height="60" width="60"/>
+      {% endfor %}
+    </div>
+    <div style=" float:right;  margin-top:200px; width:40%">
+    <button type="button" class="btn btn-default btn-block">both_time:{{ both_time }}</button>
+      {% if both_result %}
+      {% for img in both_result %}
+      <img src="{{ url_for('static', filename=img) }}"height="60" width="60" />
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div class="clear" style="clear:both;"></div>
+
+  </div>
+</div>
+
+
+
+{% endblock %}
