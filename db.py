@@ -12,9 +12,10 @@ logger.setLevel(logging.DEBUG)
 
 
 class database(object):
-    def __init__(self):
+    def __init__(self, name=None):
+        name = name or table_name
         self.db = sq.connect(dbfile)
-        self.name = table_name
+        self.name = name
 
     def create_table(self, length=48):
         try:
