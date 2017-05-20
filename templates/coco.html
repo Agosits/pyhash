@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %} result {% endblock %}
+{% block body %}
+
+
+<div style=" position: absolute; left: 20%;right:20%;top:10%;  ">
+  <div style=" margin-top:10px; position: absolute; left: 30%;">
+        <button type="button" class="btn btn-warning btn-lg">Input Image</button>
+        <img src="{{ input }}" height="144" width="144" />
+  </div>
+
+  <div>
+    <div style=" margin-top:200px; width:80%">
+      <button type="button" class="btn btn-default btn-block">coarse_time:{{ time }}</button>
+      {% for img in urls %}
+      <img src="{{ img }}"/>
+      {% endfor %}
+    </div>
+
+
+
+  </div>
+</div>
+
+
+
+{% endblock %}

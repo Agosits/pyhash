@@ -26,11 +26,12 @@ def build_db(db):
 
 cc = COCO(ann_file)
 
-imgs = []
-for id, value in cc.imgs.items():
-    imgs.append((id, value['file_name']))
+if __name__ == '__main__':
+    imgs = []
+    for id, value in cc.imgs.items():
+        imgs.append((id, value['file_name']))
 
-print 'imgs has {} imgs'.format(len(imgs))
+    print 'imgs has {} imgs'.format(len(imgs))
 
-db = database('coco')
-build_db(db)
+    db = database('coco')
+    #build_db(db)
