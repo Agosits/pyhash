@@ -1,6 +1,7 @@
 from . import *
-
+from .utils import network
 def build_db(img_list, db, transformer, net):
+    db.create_table()
     print '***** build_db opt={} *****'.format(opt)
     id = db.maxid()
     for img in img_list:

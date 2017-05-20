@@ -1,8 +1,8 @@
 import redis
 
-opt = 'cifar' # demo or cifar or mnist
+opt = 'demo' # demo or cifar or mnist
 # 0 for build,others for query; 1 for coarse; 2 for fc7; 3 for both
-step = 3
+step = 0
 
 caffe_root = '/home/fious/gitroom/caffe-cvprw15'
 caffe_path = '/home/fious/gitroom/caffe/'
