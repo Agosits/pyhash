@@ -33,6 +33,7 @@ def img_query():
 
 @app.route("/coco")
 def coco():
+    db = database('coco')
     from .coco import cc, pre_path
     key = cc.imgs.keys()[0]
     img = cc.imgs[key]['file_name']
