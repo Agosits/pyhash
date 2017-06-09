@@ -1,5 +1,8 @@
 # pyhash
-
+***
++ pip install flask redis lmdb
++ sqlite 可视化工具推荐 sqlitebrowser
+***
 + 路径
 caffe-cvprw15/
     pyhash/
@@ -50,3 +53,4 @@ utils 里有一个fine_match 和 fine_match_back，back是以前的npy检索，�
 + 写脚本 build db
 + 检索
 ***
+其实只有db和utils写的还行，其他的都很差。settings觉得写成dict式的配置不知道比函数和if语句好到哪里去了，建议新的项目使用db和utils，其他的推倒重写-_-。sorry！
