@@ -3,6 +3,9 @@
 + pip install flask redis lmdb
 + sqlite 可视化工具推荐 sqlitebrowser
 ***
+首先启动虚拟环境
+`source /home/wzq/.bash_custom` 命令行最前面出现（wzq）说明虚拟环境启动成功
+以下~指的是/home/wzq/目录
 + 路径
 caffe-cvprw15/
     pyhash/
