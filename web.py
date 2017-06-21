@@ -2,12 +2,13 @@ import os
 from flask import Flask, request,render_template
 from . import *
 from .utils import web_query, network
-from .coco import cc, pre_path
+#from .coco import cc, pre_path
+from random import randint
 
 tmp_img_file = r'./pyhash/tmp.jpg'
 app = Flask(__name__,static_url_path='',static_folder=caffe_root)
 net, transformer = net_init()
-
+print 'init end'
 @app.route("/")
 def index():
     return render_template('test.html')
